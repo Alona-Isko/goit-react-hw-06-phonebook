@@ -1,43 +1,11 @@
-import { createStore } from '@reduxjs/toolkit';
-// import contactsReducer from './contacts/reducer';
+import { createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import contactsReducer from './contacts/contacts-reducer';
 
-const initialState = {
-    contacts: {
-        items: [],
-        filter: '',
-    },
-};
+const rootReducer = combineReducers({
+    contacts: contactsReducer,
+});
 
-const reducer = (state = initialState, { type, payload }) => {
-    switch (type) {
-        case 'contacts/add':
-            return {
-                ...state,
-                contacts: {
-                    ...state.contacts,
-                    items: state.contacts.items + payload,
-                }
-            };
-        
-        case 'contacts/filter':
-            return {
-                ...state,
-                contacts: {
-                    ...state.contacts,
-                    items: state.contacts.items - payload,
-                }
-            };
-        
-        case 'contacts/delete':
-            return {
-
-            };
-        
-        default:
-            return state;
-    }
-};
-    
-const store = createStore(reducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 export default store;
