@@ -16,8 +16,7 @@ export const changeFilter = items => ({
     payload: items,
 });
 
-export const deleteContact = items => ({
+export const deleteContact = contactId => ({
     type: DELETE,
-    payload: items,
+    payload: contactId,
 });
-

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { connect } from 'react-redux';
+import { addContact, changeFilter, deleteContact } from '../../redux/contacts/contacts-actions';
 // import PropTypes from 'prop-types';
-import contactsActions from '../../redux/contacts/contacts-actions';
 import s from './ContactForm.module.css';
 import shortid from 'shortid';
 
@@ -101,9 +101,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-        onAdd: items => dispatch(contactsActions.addContact(items)),
-        onFilter: items => dispatch(contactsActions.changeFilter(items)),
-        onDelete: items => dispatch(contactsActions.deleteContact(items)),
+        onAdd: items => dispatch(addContact(items)),
+        onFilter: items => dispatch(changeFilter(items)),
+        onDelete: items => dispatch(deleteContact(items)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

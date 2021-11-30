@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
 function ContactList({ contacts, onDeleteContact }) {
@@ -20,15 +21,23 @@ function ContactList({ contacts, onDeleteContact }) {
     );
 };
 
-ContactList.propTypes = {
-    contacts: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            number: PropTypes.string.isRequired,
-        })
-    ),
-    onDeleteContact: PropTypes.func.isRequired,
+// ContactList.propTypes = {
+//     contacts: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             id: PropTypes.string.isRequired,
+//             name: PropTypes.string.isRequired,
+//             number: PropTypes.string.isRequired,
+//         })
+//     ),
+//     onDeleteContact: PropTypes.func.isRequired,
+// }
+
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = {
+
 }
 
-export default ContactList;
+export default connect()(ContactList);
