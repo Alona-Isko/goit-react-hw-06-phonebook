@@ -1,12 +1,18 @@
-import { useState } from "react";
-import { connect } from 'react-redux';
-import {addContact} from '../../redux/contacts/contacts-actions';
-// import PropTypes from 'prop-types';
-import s from './ContactForm.module.css';
 import shortid from 'shortid';
+import { useState } from "react";
+// import { connect } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import PropTypes from 'prop-types';
+
+import * as actions from '../../redux/contacts/contacts-actions';
+import { getContacts } from '../../redux/contacts/contacts-selectors';
+import s from './ContactForm.module.css';
 
 
-function ContactForm({ newContact }) {
+function ContactForm() {
+    const contacts = useSelector(getContacts);
+    const dispatch = useDispatch();
+
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
@@ -30,18 +36,20 @@ function ContactForm({ newContact }) {
         }
     };
 
+    const checkName = name => {
+        return contacts.find(
+            contact => contact.name.toLowerCase() === name.toLowerCase(),
+        )
+    };
+
     const handleSubmit = event => {
         event.preventDefault();
+
+        if (checkName(name)) {
+            return alert(`${name} is already in contacts.`);
+        }
         
-        // if (
-        //     contacts.find(
-        //         contact => contact.name.toLowerCase() === name.toLowerCase()
-        //     )) {
-        //     return alert(`${name} is already in contacts.`);
-        // }
-        // dispatch(actions.addContact(name, number));
-        
-        newContact(name, number);
+        dispatch(actions.addContact(name, number));
         reset();
     };
 
@@ -100,17 +108,20 @@ function ContactForm({ newContact }) {
     );
 };
 
-// ContactForm.propTypes = {
-//     onSubmit: PropTypes.func.isRequired,
-// };
+ContactForm.propTypes = {
+    onSubmit: PropTypes.func,
+};
 
-const mapStateToProps = state => ({
-        items: state.contacts.items,
-});
+export default ContactForm;
 
-const mapDispatchToProps = dispatch => ({
-        newContact: (name, number) => dispatch(addContact(name, number)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
+// const mapStateToProps = state => ({
+//         items: state.contacts.items,
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//         newContact: (name, number) => dispatch(actions.addContact(name, number)),
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
