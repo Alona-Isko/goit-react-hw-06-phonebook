@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 // import PropTypes from 'prop-types';
 import actions from "../../redux/contacts/contacts-actions";
@@ -20,12 +19,13 @@ const Filter = ({value, onChange}) => (
 //     value: PropTypes.string.isRequired,
 //     onChange: PropTypes.func.isRequired,
 // };
+
 const mapStateToProps = (state) => ({
-    value: state.contacts.filter
+    value: state.contacts.filter,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onChange: (ev) => dispatch(actions.changeFilter(ev.currentTarget.value))
+    onChange: (ev) => dispatch(actions.changeFilter(ev.currentTarget.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

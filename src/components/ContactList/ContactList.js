@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import actions from '../../redux/contacts/contacts-actions';
 import s from './ContactList.module.css';
 
-function ContactList({ contacts, onDeleteContact = () => null}) {
+function ContactList({ contacts, onDeleteContact }) {
     return (
         <ul className={s.ContactList__container}>
             {contacts.map(({ id, name, number }) => (

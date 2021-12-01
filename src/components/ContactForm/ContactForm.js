@@ -6,7 +6,7 @@ import s from './ContactForm.module.css';
 import shortid from 'shortid';
 
 
-function ContactForm({ items, onAdd, onFilter, onDelete }) {
+function ContactForm({ newContact }) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
@@ -28,14 +28,22 @@ function ContactForm({ items, onAdd, onFilter, onDelete }) {
             default:
                 return;
         }
-    }
+    };
 
     const handleSubmit = event => {
         event.preventDefault();
         
-        // onSubmit(name, number);
+        // if (
+        //     contacts.find(
+        //         contact => contact.name.toLowerCase() === name.toLowerCase()
+        //     )) {
+        //     return alert(`${name} is already in contacts.`);
+        // }
+        // dispatch(actions.addContact(name, number));
+        
+        newContact(name, number);
         reset();
-    }
+    };
 
     const reset = () => {
         setName('');
@@ -101,9 +109,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-        onAdd: items => dispatch(actions.addContact(items)),
-        onFilter: items => dispatch(actions.changeFilter(items)),
-        onDelete: items => dispatch(actions.deleteContact(items)),
+        newContact: (name, number) => dispatch(actions.addContact(name, number)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
