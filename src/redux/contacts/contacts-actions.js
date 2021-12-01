@@ -11,9 +11,9 @@ export const addContact = (name, number) => ({
     },
 });
 
-export const changeFilter = items => ({
+export const changeFilter = value => ({
     type: FILTER,
-    payload: items,
+    payload: value,
 });
 
 export const deleteContact = contactId => ({
